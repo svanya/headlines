@@ -1,35 +1,30 @@
 import feedparser
 from flask import Flask
 from flask import render_template
+from flask import request
 import time
 
 app = Flask(__name__)
 
-RSS_FEEDS = {'bbc': 'http://feeds.bbci.co.uk/news/rss.xml',
-             'cnn': 'http://rss.cnn.com/rss/edition.rss',
-             'fox': 'http://feeds.foxnews.com/foxnews/latest',
-             'iol': 'http://www.iol.co.za/cmlink/1.640'}
+RSS_FEEDS = {'kosmo': 'http://www.kosmonautix.cz/rubrika/micro/feed/',
+             'lupa': 'https://www.lupa.cz/rss/clanky/',
+             'zive': 'https://www.zive.cz/rss/sc-47/',
+             'root': 'https://www.root.cz/rss/zpravicky/'}
 
 
 @app.route("/")
-@app.route("/<publication>")
-def get_news(publication="bbc"):
+def get_news():
+    query = request.args.get("publication")
+    if not query or query.lower() not in RSS_FEEDS:
+        publication = "kosmo"
+    else:
+        publication = query.lower()
     feed = feedparser.parse(RSS_FEEDS[publication])
-    return render_template("home.html", articles=feed['entries'])
-
-
-#     """<html>
-#         <body>
-#                 <h1>{0} Headlines </h1>
-#                 <b>{1}</b> <br/>
-#                 <i>{2}</i> <br/>
-#                 <p>{3}</p> <br/>
-#                 <b>Generovano: {4}</b> <br/>
-#         </body>
-# </html>""".format(publication.upper(), first_article.get("title"),
-#                   first_article.get("published"),
-#                   first_article.get("summary"),
-#                   time.strftime("%d-%m-%Y %H:%M:%S"))
+    gen_time = time.strftime("%d-%m-%Y %H:%M:%S")
+    return render_template("home.html",
+                           site=feed['feed'],
+                           gen_time=gen_time,
+                           articles=feed['entries'])
 
 
 if __name__ == '__main__':
