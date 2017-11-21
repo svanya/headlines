@@ -1,11 +1,55 @@
 <html>
     <head>
         <title>Headlines</title>
+        <style>
+            html {
+                font-family: "Helvetica";
+                background: white;
+            }
+            body {
+                background: lightgrey;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            #header {
+                padding-top: 5px;
+                background: lightsteelblue;
+            }
+            #inner-header {
+                padding-left: 10px;
+            }
+            #main {
+                padding-left: 10px;
+            }
+            input[type="text"], select {
+                color: grey;
+                border: 1px solid lightsteelblue;
+                height: 30px;
+                line-height: 15px;
+                margin: 2px 6px 16px 0px;
+                padding-left: 5px;
+            }
+            input[type="submit"] {
+                padding: 5px 10px 5px 10px;
+                color: black;
+                background: lightsteelblue;
+                border: none;
+                box-shadow: 1px 1px 1px #4C6E91;
+            }
+            input[type="submit"]:hover {
+                background: steelblue;
+            }
+        </style>
     </head>
     <body>
-
-        <h1>Štefanův přehled</h1>
-        <b>Generováno: {{gen_time}}</b><br />
+        <div id="header">
+            <div id="inner-header">
+                <h1>Štefanův přehled</h1>
+                <b>Generováno: {{gen_time}}</b><br />
+            </div>
+            <hr />
+        </div>
+        <div id="main">
         <h2>Current weather</h2>
         <form>
             <input type="text" name="city" placeholder="weather search" />
@@ -43,5 +87,6 @@
             <p>{{article.summary}}</p>
             <hr />
         {% endfor %}
+        </div>
     </body>
 </html>
