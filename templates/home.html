@@ -3,7 +3,7 @@
         <title>Headlines</title>
         <style>
             html {
-                font-family: "Helvetica";
+                font-family: "Helvetica",serif;
                 background: white;
             }
             body {
@@ -56,8 +56,10 @@
             <input type="submit" value="Submit" />
          </form>
         <p>City: <b>{{weather.city}}, {{weather.country}}</b></p>
-        <p>{{weather.description}} | {{weather.temperature}}℃</p>
-
+            <p><img src="/static/{{weather.icon}}.png"> {{weather.description}} | {{weather.temperature}}℃</p>
+            <p><b>sunrise:</b> {{weather.sunrise}}</p>
+            <p><b>sunset:</b> {{weather.sunset}}</p>
+            <b>debug:</b> <b>id:</b> {{weather.id}} <b>icon:</b> {{weather.icon}} <b>dt:</b> {{weather.dt}}
         <h2>Currency</h2>
         <form>
             from: <select name="currency_from">

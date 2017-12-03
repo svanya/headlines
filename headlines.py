@@ -72,7 +72,12 @@ def get_weather(query):
         weather = {"description": parsed["weather"][0]["description"],
                    "temperature": parsed["main"]["temp"],
                    "city": parsed["name"],
-                   'country': parsed['sys']['country']
+                   "country": parsed['sys']['country'],
+                   "icon": parsed["weather"][0]["icon"],
+                   "id": parsed["weather"][0]["id"],
+                   "dt": datetime.datetime.fromtimestamp(int(parsed["dt"])).strftime('%d-%m-%Y ve %H:%M:%S'),
+                   "sunrise": datetime.datetime.fromtimestamp(int(parsed['sys']['sunrise'])).strftime('%d-%m-%Y ve %H:%M:%S'),
+                   "sunset": datetime.datetime.fromtimestamp(int(parsed['sys']['sunset'])).strftime('%d-%m-%Y ve %H:%M:%S')
                    }
     return weather
 
